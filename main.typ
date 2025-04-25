@@ -28,7 +28,7 @@
       email: "erdhi@unika.ac.id"
     )
   ),
-  index-terms: ("blockchain", "decentralized verification", "credential fraud prevention", "verification systems", "education"),
+  index-terms: ("blockchain", "credential fraud prevention", "decentralized verification", "solana credentialing", "verification systems"),
   bibliography: bibliography("refs.bib"),
   figure-supplement: [Fig.],
 )

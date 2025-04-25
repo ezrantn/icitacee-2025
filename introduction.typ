@@ -12,7 +12,7 @@ The InterPlanetary File System significantly boosts the safety and accessibility
 
 #figure(
   image("img/ipfs.png", width: 80%),
-  caption: [IPFS Distributed Network]
+  caption: [IPFS Distributed Network],
 )<ipfs>
 
 This research comprehensively analyzes Blockchain and InterPlanetary File System (IPFS) architectures, aiming to propose a robust framework. This framework is designed to significantly enhance the security and reliability of academic data management and dissemination in the digital landscape.
