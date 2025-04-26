@@ -30,7 +30,7 @@
   ),
   index-terms: ("blockchain", "credential fraud prevention", "decentralized verification", "solana credentialing", "verification systems"),
   bibliography: bibliography("refs.bib"),
-  figure-supplement: [Fig.],
+  figure-supplement: [Figure.]
 )
 
 = Introduction

@@ -10,6 +10,8 @@ Blockchain has evolved beyond cryptocurrencies, enabling innovative solutions in
 
 The InterPlanetary File System significantly boosts the safety and accessibility of digital credentials by utilizing decentralized storage, ensuring that sensitive information is protected while remaining easily accessible to authorized users, as shown in @ipfs. Improving data integrity involves reducing vulnerabilities within centralized systems and carefully controlling access, ensuring that sensitive information remains secure and trustworthy for all users @SecureFileSharingUsingBlockchainandIPFSwithSmartContract-BasedAccessControl.
 
+#set figure.caption(separator: [. ] )
+
 #figure(
   image("img/ipfs.png", width: 80%),
   caption: [IPFS Distributed Network],
