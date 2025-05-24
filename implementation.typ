@@ -1,10 +1,8 @@
-Diploma verification is an essential process to ensure the authenticity and validity of educational documents. This research aims to develop a diploma verification system using blockchain technology, specifically leveraging Solana as the blockchain platform and IPFS for distributed file storage.
+Diploma verification is an essential process to ensure the authenticity and validity of educational documents. This research aims to develop a diploma verification system using blockchain technology, specifically utilizing Solana as a blockchain platform and IPFS for distributed file storage.
 
 == System Design
 
-The system is built on two core technologies: Solana and IPFS. Solana was chosen due to its fast transaction speeds and low costs, making it a perfect fit for an application like diploma verification, which requires efficiency and scalability @Castillo2022Creducate. Solana's Proof of History (PoH) consensus mechanism ensures high throughput and low latency, crucial for handling the high volume of verification requests.
-
-On the other hand, IPFS is used to store the actual diploma files. Unlike traditional centralized storage systems, IPFS uses a decentralized network of nodes, offering greater security and reducing the risk of data manipulation. Once a diploma is uploaded to IPFS, it is given a unique cryptographic hash, which will then be stored on the Solana blockchain to ensure its authenticity. This combination of Solana and IPFS allows for a transparent and secure way to store and verify academic credentials.
+The system design is based on two core technologies, namely Solana and IPFS. Solana was chosen for its high transaction speed and low cost, making it well suited for applications such as diploma verification that require efficiency and scalability @Castillo2022Creducate. Solana's Proof of History (PoH) consensus mechanism guarantees high throughput and low latency, which is crucial for handling large volumes of verification requests. On the other hand, IPFS is used to store the actual diploma files. In contrast to traditional centralized storage systems, IPFS uses a decentralized network of nodes, thus offering higher security and reducing the risk of data manipulation. Once the diploma is uploaded to IPFS, it will be assigned a unique cryptographic hash, which will then be stored on the Solana blockchain to ensure authenticity. This combination of Solana and IPFS enables a transparent and secure way of storing and verifying academic credentials.
 
 == Development Stages
 

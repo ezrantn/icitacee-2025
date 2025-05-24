@@ -45,12 +45,14 @@
 = Concepts Overview
 #include "concept.typ"
 
-= Methodology
-#include "methodology.typ"
+= Implementation
+#include "implementation.typ"
 
 = Result & Discussion
 #include "result-discussion.typ"
 
+= Conclusion
+#include "conclusion.typ"
 // = Problem Statement
 // #include "problem-statement.typ"
 
