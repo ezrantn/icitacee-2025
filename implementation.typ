@@ -1,10 +1,57 @@
-#import "@preview/chronos:0.2.1"
+#import "@preview/pintorita:0.1.4"
+
+#show raw.where(lang: "pintora"): it => pintorita.render(it.text)
 
 Diploma verification is an essential process to ensure the authenticity and validity of educational documents. This research aims to develop a diploma verification system using blockchain technology, specifically utilizing Solana as a blockchain platform and IPFS for distributed file storage.
 
 == System Design
 
-The system design is based on two core technologies, namely Solana and IPFS. Solana was chosen for its high transaction speed and low cost, making it well suited for applications such as diploma verification that require efficiency and scalability @Castillo2022Creducate. Solana's Proof of History (PoH) consensus mechanism guarantees high throughput and low latency, which is crucial for handling large volumes of verification requests. On the other hand, IPFS is used to store the actual diploma files. In contrast to traditional centralized storage systems, IPFS uses a decentralized network of nodes, thus offering higher security and reducing the risk of data manipulation. Once the diploma is uploaded to IPFS, it will be assigned a unique cryptographic hash, which will then be stored on the Solana blockchain to ensure authenticity. This combination of Solana and IPFS enables a transparent and secure way of storing and verifying academic credentials.
+The system design is based on two core technologies, namely Solana and IPFS. Solana was chosen for its high transaction speed and low cost, making it well suited for applications such as diploma verification that require efficiency and scalability @Castillo2022Creducate.
+
+```pintora
+mindmap
+@param layoutDirection TB
++ Diploma Verification System
+++ Core Problem
++++ Widespread Diploma Fraud
++++ Cumbersome Verification Processes
+++ Existing Solutions (e.g., SIVIL)
++++ Centralized Databases
++++ Potential Weaknesses
+++++ Single Point of Failure
+++++ Data Integrity Concerns
+++++ Scalability Issues
+++ Proposed Blockchain Solution
++++ Core Technologies
+++++ Blockchain (Public/Private)
+++++ Smart Contracts (Automated Logic)
+++++ IPFS (Decentralized File Storage)
++++ Key Features & Benefits
+++++ Decentralization (No Single Control)
+++++ Immutability (Tamper-proof Records)
+++++ Transparency (Verifiable Transactions)
+++++ Enhanced Security (Cryptographic Protection)
+++++ Efficiency (Faster Verification)
++++ System Processes
+++++ Digital Diploma Issuance
+++++- Diploma Upload (to IPFS)
+++++- Metadata Storage (on Blockchain via Smart Contract)
+++++ Online Verification
+++++- Query Smart Contract (using Diploma ID)
+++++- Retrieve & Display Diploma (from IPFS)
+++ Stakeholders
++++ Students/Graduates
+++++ Secure Ownership
+++++ Easy & Global Sharing
++++ Educational Institutions
+++++ Enhanced Credibility
+++++ Reduced Administrative Burden
++++ Employers/Verifiers
+++++ Quick & Reliable Authentication
+++++ Increased Trust in Credentials
+```
+
+Solana's Proof of History (PoH) provides improved throughput and minimal latency for validations. Diplomas are kept on IPFS, which offers enhanced security and tamper-resistance due to its decentralized architecture. The distinctive IPFS hash of each diploma is subsequently linked to the Solana blockchain for verification, facilitating transparent and secure credential administration.
 
 == Development Stages
 
