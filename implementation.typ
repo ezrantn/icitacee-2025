@@ -1,3 +1,5 @@
+#import "@preview/chronos:0.2.1"
+
 Diploma verification is an essential process to ensure the authenticity and validity of educational documents. This research aims to develop a diploma verification system using blockchain technology, specifically utilizing Solana as a blockchain platform and IPFS for distributed file storage.
 
 == System Design
