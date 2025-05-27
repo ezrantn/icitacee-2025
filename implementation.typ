@@ -1,23 +1,15 @@
-#import "@preview/pintorita:0.1.4"
-
-#show raw.where(lang: "pintora"): it => pintorita.render(it.text, factor: 0.3)
-
 Diploma verification is an essential process to ensure the authenticity and validity of educational documents. This research aims to develop a diploma verification system using blockchain technology, specifically utilizing Solana as a blockchain platform and IPFS for distributed file storage.
 
 == System Design
 
 The system design is based on two core technologies, namely Solana and IPFS. Solana was chosen for its high transaction speed and low cost, making it well suited for applications such as diploma verification that require efficiency and scalability @Castillo2022Creducate.
 
-```pintora
-componentDiagram
-  start -- [Gen] : Generate Diploma
-  Gen ..> [Hash] : Store diploma on IPFS
-  Hash ..> [Link] : Link IPFS hash to Solana blockchain
-  Link ..> [Verify] : Verify diploma via IPFS + Solana
-  [Verify] -- end
-```
+#figure(
+  image("img/flow.png", width: 90%),
+  caption: [Verification Flow],
+)<flow>
 
-Solana's Proof of History (PoH) provides improved throughput and minimal latency for validations. Diplomas are kept on IPFS, which offers enhanced security and tamper-resistance due to its decentralized architecture. The distinctive IPFS hash of each diploma is subsequently linked to the Solana blockchain for verification, facilitating transparent and secure credential administration.
+Solana's Proof of History (PoH) provides improved throughput and minimal latency for validations. Diplomas are kept on IPFS, which offers enhanced security and tamper-resistance due to its decentralized architecture. The distinctive IPFS hash of each diploma is subsequently linked to the Solana blockchain for verification, facilitating transparent and secure credential administration as shown in @flow.
 
 == Development Stages
 
