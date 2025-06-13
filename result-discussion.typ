@@ -1,11 +1,11 @@
 #import "@preview/zebraw:0.5.4": *
 #show: zebraw
 
-This chapter delineates the outcomes of the installation and evaluation of the decentralized diploma verification system developed utilizing the Solana blockchain and IPFS. The outcomes are assessed according to functionality, performance, security, and user feedback collected throughout the proof of concept testing phase. This section examines the consequences of the system's performance and underscores the principal findings that illustrate its efficacy in overcoming the problems associated with conventional diploma verification methods.
+The present chapter reviews the results from deploying and stress-testing the diploma-verification platform, which marries Solanas decentralized ledger with IPFS storage. All findings are tallied along four axes-functionality, throughput, security hardening, and user sentiment gathered during the proof of concept. What follows is a candid appraisal of how the architectures performance metrics stack up against standard paper-based workflows and the disruptive potential those numbers signal for the credentialing space.
 
 == System Functionality
 
-The decentralized diploma verification system was developed and evaluated on a testnet, demonstrating efficacy. The storing and certification of diplomas are secure and transparent through the utilization of the Solana blockchain and IPFS. IPFS produces a cryptographic hash for diploma files submitted by educational institutions. This hash is documented on the Solana blockchain, guaranteeing the diploma's authenticity is immutable. To manage this data on-chain, the system utilizes specific account structures:
+A decentralized verification framework for academic credentials has been prototyped on a dedicated testnet and recorded a positive outcome. Credential storage and authentication rely on the Solana blockchain alongside the InterPlanetary File System (IPFS), ensuring both transparency and resistance to unauthorized access. Once a school uploads a diploma, IPFS generates a unique cryptographic hash of that document. This hash then resides on Solana, locking in the credential's original content and preventing later alterations. Anchoring large files on-chain requires tailored account architectures; the protocol therefore introduces custom data containers that accommodate the expanded storage footprints while minimizing impact on network throughput.
 
 ```rust
 pub struct DiplomaRegistry {
@@ -21,21 +21,21 @@ pub struct Diploma {
 }
 ```
 
-Employers or third parties can readily get the hash from the blockchain and obtain the associated diploma file from IPFS upon verification. The smart contract automates verification by comparing the hash on the blockchain with the file saved on IPFS to validate its legitimacy. The system operates fast and provides real-time results, verifying the diploma's authenticity.
+Employers or third parties can simply pull the hash off the blockchain and pull the diploma file corresponding to the hash off IPFS after verification. The verification is automatic through a comparison by the smart contract between the hash on the blockchain and the stored file on IPFS to verify its authenticity. The system is fast and provides results in real-time, verifying the diploma.
 
 == Performance and Scalability
 
-In the testing phase, the system processed over 1,000 transactions per minute on the Solana testnet, showcasing its scalability and capacity to manage substantial verification requests. The velocity of Solana’s Proof of History (PoH) consensus method was important in enabling the system to process several transactions concurrently without latency. Every transaction received confirmation within 400 milliseconds, which is well within the acceptable threshold for applications necessitating low-latency validation.
+During the test phase, the system processed over 1,000 transactions per minute on the Solana testnet, which is a measure of its scalability along with its capacity to process massive verification requests. The rate of Solana's Proof of History (PoH) consensus algorithm played a pivotal role in enabling the system to process multiple transactions simultaneously without suffering any type of latency. All the transactions were verified within 400 milliseconds, which is clearly within the threshold for applications that need low-latency verification.
 
-The system's implementation of IPFS for decentralized storage demonstrated favorable outcomes regarding retrieval times. The mean file retrieval duration from IPFS was below 2 seconds, illustrating the dependability and efficacy of decentralized storage for academic credentials. This renders the system appropriate for practical use, where rapidity and accessibility are paramount.
+Implementation of IPFS by the system for decentralized storage proved to have positive results in terms of retrieval times. The average file retrieval time from IPFS was less than 2 seconds, showing the reliability and efficiency of decentralized storage for scholarly credentials. This makes the system suitable for real-world application, where speed and accessibility are critical.
 
 == Security
 
-Security was a vital consideration throughout the system's development and testing phases. Both the Solana blockchain and IPFS utilize advanced cryptographic methods to guarantee data security and integrity.
+Security was of utmost importance throughout the system development and testing. The Solana blockchain and IPFS utilize advanced cryptographic methods to provide for data security and integrity.
 
-Utilizing Solana's Proof of History (PoH) and Proof of Stake (PoS) techniques, the blockchain offers an unalterable and visible ledger. Once a diploma is documented, it cannot be modified or removed, hence preserving the integrity of academic records. No instances of illegal alterations or tampering with the blockchain data were seen during testing.
+Using Solana's Proof of History (PoH) and Proof of Stake (PoS) approaches, the blockchain yields an untamperable and transparent record book. Once a diploma is entered, it cannot be changed or removed, thus ensuring academic records integrity. There were no instances of unauthorized changes or tampering with blockchain data during testing.
 
-The decentralized architecture of IPFS ensures that files are not housed on a singular server, hence diminishing the likelihood of centralized failure points or data tampering. Each diploma file is hashed prior to its upload to IPFS, guaranteeing that any alteration to the file will provide a distinct hash, so rendering manipulation identifiable. The solution incorporated encryption prior to uploading files to IPFS, hence enhancing security for critical academic material.
+The decentralized nature of IPFS ensures that files do not exist on a single server, minimizing the chances of central points of failure or file tampering. Every diploma file is hashed prior to uploading to IPFS, ensuring any alteration of the file will produce a different hash, hence file manipulation would be traceable. The solution employed encryption prior to uploading files to IPFS, hence providing an additional layer of security for precious academic materials.
 
 == Comparison with Existing Systems
 
@@ -47,7 +47,7 @@ Current blockchain-based diploma verification systems, including those utilized 
 
 #text(size: 8pt)[
   #table(
-    columns: (1.6fr, 1.5fr, 1.4fr),
+    columns: (1.2fr, 1.2fr, 1.2fr),
     inset: 4pt,
     align: (left, left, left, left),
     table.header(
@@ -58,8 +58,8 @@ Current blockchain-based diploma verification systems, including those utilized 
 
     [Core Architecture], [Decentralized (Chain & IPFS)], [Centralized Server],
     [Ledger], [Solana], [Traditional DB],
-    [Storage], [IPFS (Decentral.)], [Centralized Srv.],
-    [Tx Speed (Verify)], [~0.4s + $lt$2s $\aapprox$ 2.4s total], [Manual: "quick"; varies],
+    [Storage], [IPFS (Decentral)], [Centralized Server],
+    [Tx Speed (Verify)], [~0.4s + $lt$2s $\aapprox$ 2.4s total], [Varies],
     [Tx Cost], [Very Low], [N/A (internal)],
     [Scalability (TPS)], [High ($gt$1k tested)], [Server-limited],
     [Energy Efficiency], [High (PoH/PoS)], [Moderate],

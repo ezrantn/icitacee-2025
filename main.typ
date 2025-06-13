@@ -53,8 +53,3 @@
 
 = Conclusion
 #include "conclusion.typ"
-// = Problem Statement
-// #include "problem-statement.typ"
-
-// = Objectives
-// #include "objectives.typ"
