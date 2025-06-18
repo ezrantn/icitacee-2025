@@ -9,7 +9,7 @@ At the heart of the system lies a dual-technology stack that pairs the InterPlan
   caption: [Verification Flow],
 )<flow>
 
-Proof of History, a chronometric backbone built into the Solana stack, distills verification time to milliseconds while pushing transaction throughput into the tens of thousands. Academic diplomas, once minted, are pinned to IPFS clusters; that distributed arrangement locks them against silent alteration. Each document generates a unique content hash, and that fingerprint, anchored on-chain, allows anyone-crawlers, employers, or auditors-to cross-check authenticity without intermediaries, a flow outlined in @flow.
+Proof of History, a chronometric backbone built into the Solana stack, distills verification time to milliseconds while pushing transaction throughput into the tens of thousands @Nazar_Abbas_Saqib_2023. Academic diplomas, once minted, are pinned to IPFS clusters; that distributed arrangement locks them against silent alteration. Each document generates a unique content hash, and that fingerprint, anchored on-chain, allows anyone-crawlers, employers, or auditors-to cross-check authenticity without intermediaries, a flow outlined in @flow.
 
 == Development Stages
 

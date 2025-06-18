@@ -37,13 +37,13 @@ Security was of utmost importance throughout the system development and testing.
 
 Using Solana's Proof of History (PoH) and Proof of Stake (PoS) approaches, the blockchain yields an untamperable and transparent record book. Once a diploma is entered, it cannot be changed or removed, thus ensuring academic records integrity. There were no instances of unauthorized changes or tampering with blockchain data during testing.
 
-The decentralized nature of IPFS ensures that files do not exist on a single server, minimizing the chances of central points of failure or file tampering. Every diploma file is hashed prior to uploading to IPFS, ensuring any alteration of the file will produce a different hash, hence file manipulation would be traceable. The solution employed encryption prior to uploading files to IPFS, hence providing an additional layer of security for precious academic materials.
+The decentralized nature of IPFS ensures that files do not exist on a single server, minimizing the chances of central points of failure or file tampering @Trinh_Viet_Doan_2022. Every diploma file is hashed prior to uploading to IPFS, ensuring any alteration of the file will produce a different hash, hence file manipulation would be traceable. The solution employed encryption prior to uploading files to IPFS, hence providing an additional layer of security for precious academic materials.
 
 == Comparison with Existing Systems
 
 The decentralized diploma verification system was evaluated against current solutions, including SIVIL, an Indonesian online diploma verification system, and other blockchain-based systems.
 
-SIVIL tackles the problem of counterfeit diplomas; however, it depends on a centralized server, which may create a bottleneck and presents possible security and accessibility problems. The suggested solution utilizing IPFS for storage and Solana for blockchain eliminates any single point of failure, hence enhancing security and reliability.
+SIVIL addresses the issue of fake diplomas, but the system is still vulnerable to fraud and forgery in the absence of an infallible way to confirm the legitimacy of credentials, like blockchain technology @Mohamed_Al_Hemairy_2024. The suggested solution utilizing IPFS for storage and Solana for blockchain eliminates any single point of failure, hence enhancing security and reliability.
 
 Current blockchain-based diploma verification systems, including those utilized by certain colleges, frequently employ Ethereum or Hyperledger. Although these systems provide decentralized storage, their transaction prices and processing durations are elevated in comparison to Solana's economical and rapid transactions. Furthermore, Ethereum's Proof of Work (PoW) method is more energy-consuming, while Solana's Proof of History (PoH) is more efficient, rendering the proposed system more scalable and ecologically sustainable.
 
