@@ -18,16 +18,43 @@ pub struct DiplomaRegistry {
 pub struct Diploma {
     pub authority: Pubkey,
     pub diploma_id: String,
+    pub ipfs_hash: String,
     pub verified: bool,
     pub created_at: i64,
 }
 ```
 
-Employers or third parties can simply pull the hash off the blockchain and pull the diploma file corresponding to the hash off IPFS after verification. The verification is automatic through a comparison by the smart contract between the hash on the blockchain and the stored file on IPFS to verify its authenticity. The system is fast and provides results in real-time, verifying the diploma.
+The smart contract's #zebraw("add_diploma") command makes a new #zebraw("Diploma") account on the Solana blockchain. This command takes the #zebraw("diploma_id") and, most importantly, the #zebraw("ipfs_hash") (the CID of the document on IPFS) as inputs. This #zebraw("ipfs_hash") is then saved as part of the #zebraw("Diploma") record, which cannot be changed.
+
+```
+pub fn add_diploma(ctx: Context<AddDiploma>, diploma_id: String, ipfs_hash: String) -> Result<()> {
+    require!(diploma_id.len() > 0, DiplomaError::EmptyDiplomaId);
+    require!(diploma_id.len() <= 100, DiplomaError::DiplomaIdTooLong);
+    require!(ipfs_hash.len() > 0, DiplomaError::EmptyIpfsHash);
+    require!(ipfs_hash.len() <= 60, DiplomaError::IpfsHashTooLong);
+
+    let diploma_registry = &mut ctx.accounts.diploma_registry;
+    let diploma = &mut ctx.accounts.diploma;
+
+    diploma.authority = ctx.accounts.authority.key();
+    diploma.diploma_id = diploma_id;
+    diploma.ipfs_hash = ipfs_hash;
+    diploma.verified = true;
+    diploma.created_at = Clock::get()?.unix_timestamp;
+
+    diploma_registry.count += 1;
+
+    msg!("Diploma added: {}", diploma.diploma_id);
+    msg!("IPFS Hash: {}", diploma.ipfs_hash);
+    Ok(())
+}
+```
+
+To start the verification process, employers or other parties must first get the #zebraw("ipfs_hash") from the right #zebraw("Diploma") account on the Solana blockchain. Then, using this hash, their program (the dApp frontend) gets the real diploma file from the IPFS network through an IPFS gateway. After getting the file, the dApp calculates its own cryptographic hash. The dApp then compares the #zebraw("ipfs_hash") that was taken from the blockchain to this new hash. If the hashes match, it is immediately clear that the diploma is real and has not been tampered with. This off-chain retrieval and comparison mechanism is what makes decentralized storage with blockchain smart contracts work well.
 
 == Performance and Scalability
 
-During the test phase, the system processed over 1,000 transactions per minute on the Solana testnet, which is a measure of its scalability along with its capacity to process massive verification requests. The rate of Solana's Proof of History (PoH) consensus algorithm played a pivotal role in enabling the system to process multiple transactions simultaneously without suffering any type of latency. All the transactions were verified within 400 milliseconds, which is clearly within the threshold for applications that need low-latency verification.
+During the test phase, the system processed over 1,000 transactions per minute on the Solana testnet, which is a measure of its scalability along with its capacity to process massive verification requests. The system's ability to handle numerous concurrent transactions with low latency was greatly aided by Solana's Proof of History (PoH) consensus algorithm. All the transactions were verified within 400 milliseconds, which is clearly within the threshold for applications that need low-latency verification.
 
 Implementation of IPFS by the system for decentralized storage proved to have positive results in terms of retrieval times. The average file retrieval time from IPFS was less than 2 seconds, showing the reliability and efficiency of decentralized storage for scholarly credentials. This makes the system suitable for real-world application, where speed and accessibility are critical.
 
@@ -45,7 +72,7 @@ The decentralized diploma verification system was evaluated against current solu
 
 SIVIL addresses the issue of fake diplomas, but the system is still vulnerable to fraud and forgery in the absence of an infallible way to confirm the legitimacy of credentials, like blockchain technology @Mohamed_Al_Hemairy_2024. The suggested solution utilizing IPFS for storage and Solana for blockchain eliminates any single point of failure, hence enhancing security and reliability.
 
-Current blockchain-based diploma verification systems, including those utilized by certain colleges, frequently employ Ethereum or Hyperledger. Although these systems provide decentralized storage, their transaction prices and processing durations are elevated in comparison to Solana's economical and rapid transactions. Furthermore, Ethereum's Proof of Work (PoW) method is more energy-consuming, while Solana's Proof of History (PoH) is more efficient, rendering the proposed system more scalable and ecologically sustainable.
+Current blockchain-based diploma verification systems, including those utilized by certain colleges, frequently employ Ethereum or Hyperledger. Although these systems provide decentralized storage, their transaction prices and processing durations are elevated in comparison to Solana's economical and rapid transactions. Furthermore, Ethereum's Proof of Work (PoW) method is more energy-consuming, while Solana's Proof of History (PoH) is more efficient @Seungdo_Yu_2024, rendering the proposed system more scalable and ecologically sustainable.
 
 #let three-line-table = tablem.with(
   render: (columns: (2fr, 3fr, 2fr), ..args) => {
@@ -65,10 +92,10 @@ Current blockchain-based diploma verification systems, including those utilized 
 #three-line-table[
   | *Feature* | *Proposed System* | *SIVIL* |
   | ------ | ---------- | -------- |
-  | Core Architecture | Decentralized (Chain & IPFS) | Centralized Server |
+  | Architecture | Decentralized (Chain & IPFS) | Centralized Server |
   | Ledger | Solana | Traditional DB |
   | Storage | IPFS (Decentral) | Centralized Server |
-  | Tx Speed (Verify) | ~0.4s + \<2s ≈ 2.4s total | Varies |
+  | Tx Speed (Verify) | ~2.4 seconds (0.4s + \<2s) | Varies |
   | Tx Cost | Very Low | N/A (internal) |
   | Scalability (TPS) | High (>1k tested) | Server-limited |
   | Energy Efficiency | High (PoH/PoS) | Moderate |
