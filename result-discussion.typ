@@ -1,4 +1,6 @@
 #import "@preview/zebraw:0.5.4": *
+#import "@preview/tablem:0.2.0": tablem, three-line-table
+
 #show: zebraw
 
 The present chapter reviews the results from deploying and stress-testing the diploma-verification platform, which marries Solanas decentralized ledger with IPFS storage. All findings are tallied along four axes-functionality, throughput, security hardening, and user sentiment gathered during the proof of concept. What follows is a candid appraisal of how the architectures performance metrics stack up against standard paper-based workflows and the disruptive potential those numbers signal for the credentialing space.
@@ -45,38 +47,34 @@ SIVIL tackles the problem of counterfeit diplomas; however, it depends on a cent
 
 Current blockchain-based diploma verification systems, including those utilized by certain colleges, frequently employ Ethereum or Hyperledger. Although these systems provide decentralized storage, their transaction prices and processing durations are elevated in comparison to Solana's economical and rapid transactions. Furthermore, Ethereum's Proof of Work (PoW) method is more energy-consuming, while Solana's Proof of History (PoH) is more efficient, rendering the proposed system more scalable and ecologically sustainable.
 
-#show "TABLE I": it => {
-  set text(font: "Linux Libertine", weight: "bold")
-  it
-}
-
-#let ieee_table = table(
-  columns: (1fr, 1fr, 1fr),
-  inset: 3pt,
-  align: (left, left, left),
-  stroke: (x: 1pt, y: 0.5pt),
-  table.header(
-    [*Feature*],
-    [*Proposed System*],
-    [*SIVIL* (Indonesia)],
-  ),
-
-  [Core Architecture], [Decentralized (Chain & IPFS)], [Centralized Server],
-  [Ledger], [Solana], [Traditional DB],
-  [Storage], [IPFS (Decentral)], [Centralized Server],
-  [Tx Speed (Verify)], [~0.4s + $lt$2s $\aapprox$ 2.4s total], [Varies],
-  [Tx Cost], [Very Low], [N/A (internal)],
-  [Scalability (TPS)], [High ($gt$1k tested)], [Server-limited],
-  [Energy Efficiency], [High (PoH/PoS)], [Moderate],
-  [Key Vulnerability], [Smart contract bugs, IPFS pinning], [Single point failure, DDoS],
-  [Primary Advantage], [Speed, low cost, robust decentral.], [Nat. standard, authoritative],
+#let three-line-table = tablem.with(
+  render: (columns: (2fr, 3fr, 2fr), ..args) => {
+    table(
+      columns: columns,
+      stroke: none,
+      align: (left, left, left),
+      inset: 2pt,
+      table.hline(y: 0),
+      table.hline(y: 1, stroke: .5pt),
+      ..args,
+      table.hline(),
+    )
+  },
 )
 
-#block(
-  width: 100%,
-  stroke: (top: 1pt, bottom: 1pt),
-  ieee_table,
-)
+#three-line-table[
+  | *Feature* | *Proposed System* | *SIVIL* |
+  | ------ | ---------- | -------- |
+  | Core Architecture | Decentralized (Chain & IPFS) | Centralized Server |
+  | Ledger | Solana | Traditional DB |
+  | Storage | IPFS (Decentral) | Centralized Server |
+  | Tx Speed (Verify) | ~0.4s + \<2s ≈ 2.4s total | Varies |
+  | Tx Cost | Very Low | N/A (internal) |
+  | Scalability (TPS) | High (>1k tested) | Server-limited |
+  | Energy Efficiency | High (PoH/PoS) | Moderate |
+  | Key Vulnerability | Smart contract bugs, IPFS pinning | Single point failure, DDoS |
+  | Advantage | Speed, low cost, robust decentral. | Nat. standard, authoritative |
+]
 
 == Limitations and Challenges
 
