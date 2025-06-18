@@ -7,7 +7,7 @@ The present chapter reviews the results from deploying and stress-testing the di
 
 A decentralized verification framework for academic credentials has been prototyped on a dedicated testnet and recorded a positive outcome. Credential storage and authentication rely on the Solana blockchain alongside the InterPlanetary File System (IPFS), ensuring both transparency and resistance to unauthorized access. Once a school uploads a diploma, IPFS generates a unique cryptographic hash of that document. This hash then resides on Solana, locking in the credential's original content and preventing later alterations. Anchoring large files on-chain requires tailored account architectures; the protocol therefore introduces custom data containers that accommodate the expanded storage footprints while minimizing impact on network throughput.
 
-```rust
+```
 pub struct DiplomaRegistry {
     pub authority: Pubkey,
     pub count: u64,
@@ -45,28 +45,38 @@ SIVIL tackles the problem of counterfeit diplomas; however, it depends on a cent
 
 Current blockchain-based diploma verification systems, including those utilized by certain colleges, frequently employ Ethereum or Hyperledger. Although these systems provide decentralized storage, their transaction prices and processing durations are elevated in comparison to Solana's economical and rapid transactions. Furthermore, Ethereum's Proof of Work (PoW) method is more energy-consuming, while Solana's Proof of History (PoH) is more efficient, rendering the proposed system more scalable and ecologically sustainable.
 
-#text(size: 8pt)[
-  #table(
-    columns: (1.2fr, 1.2fr, 1.2fr),
-    inset: 4pt,
-    align: (left, left, left, left),
-    table.header(
-      [*Feature*],
-      [*Proposed System* (Solana/IPFS)],
-      [*SIVIL* (Indonesia)],
-    ),
+#show "TABLE I": it => {
+  set text(font: "Linux Libertine", weight: "bold")
+  it
+}
 
-    [Core Architecture], [Decentralized (Chain & IPFS)], [Centralized Server],
-    [Ledger], [Solana], [Traditional DB],
-    [Storage], [IPFS (Decentral)], [Centralized Server],
-    [Tx Speed (Verify)], [~0.4s + $lt$2s $\aapprox$ 2.4s total], [Varies],
-    [Tx Cost], [Very Low], [N/A (internal)],
-    [Scalability (TPS)], [High ($gt$1k tested)], [Server-limited],
-    [Energy Efficiency], [High (PoH/PoS)], [Moderate],
-    [Key Vulnerability], [Smart contract bugs, IPFS pinning], [Single point failure, DDoS],
-    [Primary Advantage], [Speed, low cost, robust decentral.], [Nat. standard, authoritative],
-  )
-]
+#let ieee_table = table(
+  columns: (1fr, 1fr, 1fr),
+  inset: 3pt,
+  align: (left, left, left),
+  stroke: (x: 1pt, y: 0.5pt),
+  table.header(
+    [*Feature*],
+    [*Proposed System*],
+    [*SIVIL* (Indonesia)],
+  ),
+
+  [Core Architecture], [Decentralized (Chain & IPFS)], [Centralized Server],
+  [Ledger], [Solana], [Traditional DB],
+  [Storage], [IPFS (Decentral)], [Centralized Server],
+  [Tx Speed (Verify)], [~0.4s + $lt$2s $\aapprox$ 2.4s total], [Varies],
+  [Tx Cost], [Very Low], [N/A (internal)],
+  [Scalability (TPS)], [High ($gt$1k tested)], [Server-limited],
+  [Energy Efficiency], [High (PoH/PoS)], [Moderate],
+  [Key Vulnerability], [Smart contract bugs, IPFS pinning], [Single point failure, DDoS],
+  [Primary Advantage], [Speed, low cost, robust decentral.], [Nat. standard, authoritative],
+)
+
+#block(
+  width: 100%,
+  stroke: (top: 1pt, bottom: 1pt),
+  ieee_table,
+)
 
 == Limitations and Challenges
 
