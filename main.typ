@@ -37,6 +37,7 @@
   ),
   bibliography: bibliography("refs.bib"),
   figure-supplement: [Figure],
+  paper-size: "a4",
 )
 
 = Introduction
