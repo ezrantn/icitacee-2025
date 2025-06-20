@@ -1,4 +1,4 @@
-#import "@preview/charged-ieee:0.1.3": ieee
+#import "./local-template/lib.typ": ieee
 
 #show: ieee.with(
   title: [A Blockchain and InterPlanetary File System (IPFS) Based Smart Contract Framework for Preventing Certificate Fraud in Academia],
@@ -54,3 +54,4 @@
 
 = Conclusion
 #include "conclusion.typ"
+terms

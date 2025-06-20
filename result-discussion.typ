@@ -89,19 +89,22 @@ Current blockchain-based diploma verification systems, including those utilized 
   },
 )
 
-#three-line-table[
-  | *Feature* | *Proposed System* | *SIVIL* |
-  | ------ | ---------- | -------- |
-  | Architecture | Decentralized (Chain & IPFS) | Centralized Server |
-  | Ledger | Solana | Traditional DB |
-  | Storage | IPFS (Decentral) | Centralized Server |
-  | Tx Speed (Verify) | ~2.4 seconds (0.4s + \<2s) | Varies |
-  | Tx Cost | Very Low | N/A (internal) |
-  | Scalability (TPS) | High (>1k tested) | Server-limited |
-  | Energy Efficiency | High (PoH/PoS) | Moderate |
-  | Key Vulnerability | Smart contract bugs, IPFS pinning | Single point failure, DDoS |
-  | Advantage | Speed, low cost, robust decentral. | Nat. standard, authoritative |
-]
+#figure(
+  three-line-table[
+    | *Feature* | *Proposed System* | *SIVIL* |
+    | ------ | ---------- | -------- |
+    | Architecture | Decentralized (Chain & IPFS) | Centralized Server |
+    | Ledger | Solana | Traditional DB |
+    | Storage | IPFS (Decentral) | Centralized Server |
+    | Tx Speed (Verify) | ~2.4 seconds (0.4s + \<2s) | Varies |
+    | Tx Cost | Very Low | N/A (internal) |
+    | Scalability (TPS) | High (>1k tested) | Server-limited |
+    | Energy Efficiency | High (PoH/PoS) | Moderate |
+    | Key Vulnerability | Smart contract bugs, IPFS pinning | Single point failure, DDoS |
+    | Advantage | Speed, low cost, robust decentral. | Nat. standard, authoritative |
+  ],
+  caption: [Comparison of Proposed System vs. SIVIL],
+) <comparison>
 
 == Limitations and Challenges
 
