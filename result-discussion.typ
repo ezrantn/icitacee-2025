@@ -7,7 +7,9 @@ The present chapter reviews the results from deploying and stress-testing the di
 
 == System Functionality
 
-A decentralized verification framework for academic credentials has been prototyped on a dedicated testnet and recorded a positive outcome. Credential storage and authentication rely on the Solana blockchain alongside the InterPlanetary File System (IPFS), ensuring both transparency and resistance to unauthorized access. Once a school uploads a diploma, IPFS generates a unique cryptographic hash of that document. This hash then resides on Solana, locking in the credential's original content and preventing later alterations. Anchoring large files on-chain requires tailored account architectures; the protocol therefore introduces custom data containers that accommodate the expanded storage footprints while minimizing impact on network throughput.
+A decentralized system for the verification of academic qualifications has been prototyped on a testnet based on the Solana blockchain and InterPlanetary File System for storage and verification. The protocol is transparent, secure against unauthorized access, and provides specialized data containers for higher storage footprints.
+
+To support decentralized diploma storage and verification, a smart contract was deployed on the Solana testnet. This contract defines two key data structures: `DiplomaRegistry`, which tracks the number of diplomas issued by an authority, and `Diploma`, which stores the details of each issued diploma. The design ensures immutability and traceability of records by anchoring each credential to a specific IPFS hash.
 
 ```
 pub struct DiplomaRegistry {
@@ -24,7 +26,9 @@ pub struct Diploma {
 }
 ```
 
-The smart contract's #zebraw("add_diploma") command makes a new #zebraw("Diploma") account on the Solana blockchain. This command takes the #zebraw("diploma_id") and, most importantly, the #zebraw("ipfs_hash") (the CID of the document on IPFS) as inputs. This #zebraw("ipfs_hash") is then saved as part of the #zebraw("Diploma") record, which cannot be changed.
+These data structures are deployed as on-chain accounts in Solana, ensuring that each issued diploma is cryptographically linked to the issuing authority and its IPFS-hosted file.
+
+The following function, add_diploma, is the core logic for registering new diplomas. It accepts a unique diploma_id and an ipfs_hash (Content Identifier) generated after uploading the document to IPFS. Once submitted, the function creates a new Diploma record on-chain, increments the registry counter, and logs the relevant data:
 
 ```
 pub fn add_diploma(ctx: Context<AddDiploma>, diploma_id: String, ipfs_hash: String) -> Result<()> {
@@ -50,7 +54,9 @@ pub fn add_diploma(ctx: Context<AddDiploma>, diploma_id: String, ipfs_hash: Stri
 }
 ```
 
-To start the verification process, employers or other parties must first get the #zebraw("ipfs_hash") from the right #zebraw("Diploma") account on the Solana blockchain. Then, using this hash, their program (the dApp frontend) gets the real diploma file from the IPFS network through an IPFS gateway. After getting the file, the dApp calculates its own cryptographic hash. The dApp then compares the #zebraw("ipfs_hash") that was taken from the blockchain to this new hash. If the hashes match, it is immediately clear that the diploma is real and has not been tampered with. This off-chain retrieval and comparison mechanism is what makes decentralized storage with blockchain smart contracts work well.
+By enforcing length checks and field validation, the function reduces risks of invalid input or on-chain spam.
+
+To verify a diploma, an employer queries the blockchain to retrieve the Diploma account using the diploma_id, then extracts the stored ipfs_hash. This hash is used to fetch the original file from IPFS. A local hash is then computed from the downloaded file and compared to the stored one. If the hashes match, the diploma is proven authentic. This off-chain hash matching allows the system to remain lightweight while preserving data integrity.
 
 == Performance and Scalability
 
@@ -72,22 +78,20 @@ The decentralized diploma verification system was evaluated against current solu
 
 SIVIL addresses the issue of fake diplomas, but the system is still vulnerable to fraud and forgery in the absence of an infallible way to confirm the legitimacy of credentials, like blockchain technology @Mohamed_Al_Hemairy_2024. The suggested solution utilizing IPFS for storage and Solana for blockchain eliminates any single point of failure, hence enhancing security and reliability.
 
-Current blockchain-based diploma verification systems, including those utilized by certain colleges, frequently employ Ethereum or Hyperledger. Although these systems provide decentralized storage, their transaction prices and processing durations are elevated in comparison to Solana's economical and rapid transactions. Furthermore, Ethereum's Proof of Work (PoW) method is more energy-consuming, while Solana's Proof of History (PoH) is more efficient @Seungdo_Yu_2024, rendering the proposed system more scalable and ecologically sustainable.
+Current blockchain-based diploma verification systems, including those utilized by certain colleges, frequently employ Ethereum or Hyperledger. Although these systems provide decentralized storage, their transaction prices and processing durations are elevated in comparison to Solana's economical and rapid transactions. Furthermore, Ethereum's Proof of Work (PoW) method is more energy-consuming, while Solana's Proof of History (PoH) is more efficient @Seungdo_Yu_2024, rendering the proposed system more scalable and ecologically sustainable. @comparison presents a feature-based comparison between the proposed system and SIVIL. The proposed solution offers faster verification, lower cost, and greater scalability due to its use of Solana and IPFS.
 
-#let three-line-table = tablem.with(
-  render: (columns: (2fr, 3fr, 2fr), ..args) => {
-    table(
-      columns: columns,
-      stroke: none,
-      align: (left, left, left),
-      inset: 2pt,
-      table.hline(y: 0),
-      table.hline(y: 1, stroke: .5pt),
-      ..args,
-      table.hline(),
-    )
-  },
-)
+#let three-line-table = tablem.with(render: (columns: (2fr, 3fr, 2fr), ..args) => {
+  table(
+    columns: columns,
+    stroke: none,
+    align: (left, left, left),
+    inset: 2pt,
+    table.hline(y: 0),
+    table.hline(y: 1, stroke: .5pt),
+    ..args,
+    table.hline(),
+  )
+})
 
 #figure(
   three-line-table[

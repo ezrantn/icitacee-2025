@@ -94,13 +94,7 @@
   show ref: it => {
     if it.element != none and it.element.func() == math.equation {
       // Override equation references.
-      link(
-        it.element.location(),
-        numbering(
-          it.element.numbering,
-          ..counter(math.equation).at(it.element.location()),
-        ),
-      )
+      link(it.element.location(), numbering(it.element.numbering, ..counter(math.equation).at(it.element.location())))
     } else {
       // Other references as usual.
       it
@@ -163,58 +157,49 @@
   // Display the paper's title and authors at the top of the page,
   // spanning all columns (hence floating at the scope of the
   // columns' parent, which is the page).
-  place(
-    top,
-    float: true,
-    scope: "parent",
-    clearance: 30pt,
+  place(top, float: true, scope: "parent", clearance: 30pt, {
     {
-      {
-        set align(center)
-        set par(leading: 0.5em)
-        set text(size: 24pt)
-        block(below: 8.35mm, title)
-      }
+      set align(center)
+      set par(leading: 0.5em)
+      set text(size: 24pt)
+      block(below: 8.35mm, title)
+    }
 
-      // Display the authors list.
-      set par(leading: 0.6em)
-      for i in range(calc.ceil(authors.len() / 3)) {
-        let end = calc.min((i + 1) * 3, authors.len())
-        let is-last = authors.len() == end
-        let slice = authors.slice(i * 3, end)
-        grid(
-          columns: slice.len() * (1fr,),
-          gutter: 12pt,
-          ..slice.map(author => align(
-            center,
-            {
-              text(size: 11pt, author.name)
-              if "department" in author [
-                \ #emph(author.department)
-              ]
-              if "organization" in author [
-                \ #emph(author.organization)
-              ]
-              if "location" in author [
-                \ #author.location
-              ]
-              if "email" in author {
-                if type(author.email) == str [
-                  \ #link("mailto:" + author.email)
-                ] else [
-                  \ #author.email
-                ]
-              }
-            },
-          ))
-        )
+    // Display the authors list.
+    set par(leading: 0.6em)
+    for i in range(calc.ceil(authors.len() / 3)) {
+      let end = calc.min((i + 1) * 3, authors.len())
+      let is-last = authors.len() == end
+      let slice = authors.slice(i * 3, end)
+      grid(
+        columns: slice.len() * (1fr,),
+        gutter: 12pt,
+        ..slice.map(author => align(center, {
+          text(size: 11pt, author.name)
+          if "department" in author [
+            \ #emph(author.department)
+          ]
+          if "organization" in author [
+            \ #emph(author.organization)
+          ]
+          if "location" in author [
+            \ #author.location
+          ]
+          if "email" in author {
+            if type(author.email) == str [
+              \ #link("mailto:" + author.email)
+            ] else [
+              \ #author.email
+            ]
+          }
+        }))
+      )
 
-        if not is-last {
-          v(16pt, weak: true)
-        }
+      if not is-last {
+        v(16pt, weak: true)
       }
-    },
-  )
+    }
+  })
 
   set par(justify: true, first-line-indent: (amount: 1em, all: true), spacing: 0.5em, leading: 0.5em)
 

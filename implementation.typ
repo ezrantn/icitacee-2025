@@ -4,10 +4,11 @@ The practice of diploma verification has grown indispensable for confirming that
 
 At the heart of the system lies a dual-technology stack that pairs the InterPlanetary File System with the Solana blockchain. The latter platform is frequently selected because its consensus mechanism produces finality within seconds and keeps transaction fees near zero; those traits matter in use cases such as diploma verification, where both throughput and economic predictability @Castillo2022Creducate.
 
-#figure(
-  image("img/flow.png", width: 80%),
-  caption: [Verification Flow],
-)<flow>
+#show figure.caption: set align(center)
+
+#align(center)[
+  #figure(image("img/untitled.png", width: 100%), caption: [Verification Flow of Blockhain-based Diploma System])<flow>
+]
 
 Proof of History, a chronometric backbone built into the Solana stack, distills verification time to milliseconds while pushing transaction throughput into the tens of thousands @Nazar_Abbas_Saqib_2023. Academic diplomas, once minted, are pinned to IPFS clusters; that distributed arrangement locks them against silent alteration. Each document generates a unique content hash, and that fingerprint, anchored on-chain, allows anyone-crawlers, employers, or auditors-to cross-check authenticity without intermediaries, a flow outlined in @flow.
 
