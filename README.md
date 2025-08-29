@@ -1,3 +1,3 @@
-# Paper
+This repository contains the Typst source code for my paper and presentation slides on diploma verification using smart contracts.
 
-This is part of my thesis paper that talks about diploma degree verification using smart contract. In order to complete the Bachelor Degree.
+This work was presented at the **ICITACEE 2025** conference. The official publication in IEEE Xplore is forthcoming.
